@@ -13,11 +13,7 @@ import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { SelectList } from "react-native-dropdown-select-list";
 
 import BottomBar from "../Home/components/BottomBar.js";
-import Tab from "./Tab.js";
-import CalendarTab from "./components/CalendarTab.js";
-import WeatherTab from "./components/WeatherTab.js";
-import BusTab from "./components/BusTab.js";
-import NewsTab from "./components/NewsTab.js";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Unregister from "./Unregister.js";
 
@@ -29,16 +25,26 @@ export default function Settings() {
   const [showModalTime, setShowModalTime] = useState(false);
   const [activeTab, setActiveTab] = useState("C");
   const [selected, setSelected] = useState("");
-  const timeline = [
-    { key: "1", value: "오전 06:00 - 오전 08:00" },
-    { key: "2", value: "오전 08:00 - 오전 10:00" },
-    { key: "3", value: "오전 10:00 - 오후 12:00" },
-    { key: "4", value: "오후 16:00 - 오후 18:00" },
-    { key: "5", value: "오후 18:00 - 오후 20:00" },
-    { key: "6", value: "사용 안함" },
-  ];
 
-  const Logout = async () => {
+  const gesturePage = () => {
+    axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=config-start")
+                      .then((response) => {
+                        console.log(response.status);
+                        if (response.status === 200) {
+                          console.log("제스처 설정");
+                          // Alert.alert("제스처 설정", "제스처 설정 페이지로 이동");
+                          navigation.navigate('Gesture');
+                        } else {
+                          console.error("제스처 설정 페이지 오류:", response.status);
+                          Alert.alert("제스처 설정", "제스처 설정 페이지 불러오기 실패.");
+                        }
+                      })
+                      .catch((error) => {
+                        console.error("네트워크 오류 발생:", error);
+                        navigation.navigate('Settings');
+                      });
+  }
+ /* const Logout = async () => {
     var accessToken = getData();
     axios ({
       method: 'post',
@@ -55,9 +61,9 @@ export default function Settings() {
       console.log('logout error', error);
     })
     navigation.navigate("Splash", { screen: "Splash" } );
-  };
+  }; */
 
-  const getData = async() => {
+  /*const getData = async() => {
     try {
       const value = await AsyncStorage.getItem('userAccessToken');
       if (value !== null) {
@@ -67,15 +73,15 @@ export default function Settings() {
     } catch (error) {
       console.log('getData error', error);
     }
-  };
+  };*/
 
-  const removeData = async() => {
+  /*const removeData = async() => {
     try {
       await AsyncStorage.removeItem('userAccessToken');
     } catch (error) {
       console.log('removeData error', error);
     }
-  };
+  };*/
 
   return (
     <View style={styles.container}>
@@ -107,7 +113,8 @@ export default function Settings() {
             size={24}
             color="black"
             onPress={() => {
-              setShowModalKeyword(!showModalKeyword);
+              // navigation.navigate("Gesture");
+              gesturePage();
             }}
           />
         </View>
@@ -118,7 +125,7 @@ export default function Settings() {
             size={24}
             color="black"
             onPress={() => {
-              navigation.navigate("CheckInfo")
+              navigation.navigate("CheckInfo");
             }}
           />
         </View>
@@ -144,8 +151,8 @@ export default function Settings() {
             }}
           />
         </View>
+        {/*
         <View>
-          {/* 키워드 모달창 컨테이너 */}
           <Modal
             animationType={"fade"}
             transparent={true}
@@ -154,7 +161,6 @@ export default function Settings() {
               console.log("Modal has been closed.");
             }}
           >
-            {/* 모달창 안에 들어가는 내용들 */}
             <View style={styles.modalContainer}>
               <View style={styles.keyword}>
                 <View style={styles.keywordContainer}>
@@ -189,7 +195,7 @@ export default function Settings() {
           </Modal>
         </View>
         <View>
-          {/* 시간설정 모달창 컨테이너 */}
+         
           <Modal
             animationType={"fade"}
             transparent={true}
@@ -198,7 +204,6 @@ export default function Settings() {
               console.log("Modal has been closed.");
             }}
           >
-            {/* 모달창 안에 들어가는 내용들 */}
             <View style={styles.modalContainer}>
               <View style={styles.keyword}>
                 <View style={styles.keywordContainer}>
@@ -235,7 +240,7 @@ export default function Settings() {
               </View>
             </View>
           </Modal>
-        </View>
+        </View> */}
       </View>
       <View style={styles.footer}>
         <BottomBar />

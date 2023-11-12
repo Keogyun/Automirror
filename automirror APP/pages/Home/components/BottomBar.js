@@ -28,13 +28,13 @@ export default function BottomBar() {
           size={32}
           color="black"
           onPress={() =>
-            navigation.reset({ routes: [{ name: "CalendarDetails" }] })
+            navigation.reset({ routes: [{ name: "TodoInfo" }] })
           }
         />
         <Text
           style={{ color: "#555555", fontWeight: "600", marginTop: 4 }}
           onPress={() =>
-            navigation.reset({ routes: [{ name: "CalendarDetails" }] })
+            navigation.reset({ routes: [{ name: "TodoInfo" }] })
           }
         >
           일정
@@ -45,11 +45,11 @@ export default function BottomBar() {
           name="bus"
           size={30}
           color="black"
-          onPress={() => navigation.navigate("BusDetails")}
+          onPress={() => navigation.navigate("BusInfo")}
         />
         <Text
           style={{ color: "#555555", fontWeight: "600", marginTop: 4 }}
-          onPress={() => navigation.navigate("BusDetails")}
+          onPress={() => navigation.navigate("BusInfo")}
         >
           버스
         </Text>
@@ -60,13 +60,15 @@ export default function BottomBar() {
           size={32}
           color="black"
           onPress={() =>
-            navigation.reset({ routes: [{ name: "NewsDetails" }] })
+            navigation.navigate("NewsInfo")
+            // navigation.reset({ routes: [{ name: "NewsInfo" }] })
           }
         />
         <Text
           style={{ color: "#555555", fontWeight: "600", marginTop: 4 }}
           onPress={() =>
-            navigation.reset({ routes: [{ name: "NewsDetails" }] })
+            navigation.navigate("NewsInfo")
+            // navigation.reset({ routes: [{ name: "NewsInfo" }] })
           }
         >
           뉴스

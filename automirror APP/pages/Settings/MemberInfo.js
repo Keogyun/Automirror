@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Image, StyleSheet, View, TouchableHighlight, Text, TextInput, Alert } from "react-native";
-import { userId, userPwd, userName, userEmail } from "../Settings/CheckInfo";
+import { userId, userPassword, userName, userEmail } from "../Settings/CheckInfo";
 import { useNavigation } from "@react-navigation/native";
 
 export default function MemberInfo() {
@@ -44,9 +44,7 @@ export default function MemberInfo() {
                 }
             ).then(function(response){
                 console.log(response.data);
-
                 if(response.data.status === 200) {
-                    check = false;
                     Alert.alert('회원정보 수정',
                                 "회원정보가 수정되었습니다.",
                                 [{
@@ -72,7 +70,7 @@ export default function MemberInfo() {
                 <TextInput
                 style={styles.textInput}
                 secureTextEntry={true}
-                placeholder={userPwd}
+                placeholder={userPassword}
                 underlineColorAndroid="transparent"
                 onChangeText={(pwdFirst)=>setPwdFirst(pwdFirst)}/> 
             </View>
@@ -82,7 +80,7 @@ export default function MemberInfo() {
                 <TextInput
                 style={styles.textInput}
                 secureTextEntry={true}
-                placeholder={userPwd}
+                placeholder={userPassword}
                 underlineColorAndroid="transparent"
                 onChangeText={(pwdSecond)=>setPwdSecond(pwdSecond)} />
             </View>

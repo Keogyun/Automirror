@@ -1,15 +1,59 @@
 import axios from "axios";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, TextInput, TouchableOpacity, Text, Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native"; 
 import { useState } from "react";
-import { loginData } from "../Splash/Login.js";
+import { userId } from "../Splash/Login.js";
 
 export default function Device() {
-    const [deviceID, inputDeviceId] = useState("");
-    const userData = loginData();
+    const navigation = useNavigation();
+    const [deviceId, setDeviceId] = useState("");
+    var domain = "";
+    // const userData = loginData();
 
-    const sendDevice = async () => {
+    function sendDevice(){
+      if(deviceId.trim() == ""){
+          Alert.alert("시리얼번호", "기기의 시리얼번호를 입력해주세요.");
+      }
+      else{
+          axios.post("http://ceprj.gachon.ac.kr:60004/device/find-url", 
+              {
+                      "deviceId": deviceId
+              }).then(function(resp){
+                  console.log(resp.data);
+                  if(resp.data.status === 200) {
+                      console.log("시리얼번호 전송");
+                      console.log(resp.data);
+                      domain = resp.data.deviceAddress;
+                      // AsyncStorage.setItem('device',JSON.stringify(deviceId)); 
+                      axios.get(`${domain}/api/saveMessage?message=${userId}`)
+                      .then((response) => {
+                        console.log(response.status);
+                        if (response.status === 200) {
+                          console.log("기기 등록 성공.");
+                          Alert.alert("기기등록", "기기등록 성공했습니다.");
+                        } else {
+                          console.error("기기등록 중 오류 발생:", response.status);
+                          Alert.alert("기기등록", "기기등록 실패했습니다.");
+                        }
+                        navigation.navigate('Settings');
+                      })
+                      .catch((error) => {
+                        console.error("네트워크 오류 발생:", error);
+                      });
+                      navigation.navigate('Settings');
+                    }
+                  else{
+                      Alert.alert("시리얼번호", "시리얼번호를 확인하세요.");
+                  }
+
+              }).catch(function(err){
+                  Alert.alert("deviceId error", err.message);
+              })
+      }
+  };
+    /*const sendDevice = async () => {
         axios ({
-        method: 'get',
+        method: 'post',
         url: 'ceprj.gachon.ac.kr:60004/',
         params: {
             device_id: deviceID
@@ -31,142 +75,62 @@ export default function Device() {
         }).catch(function (error) {
           console.log('deviceId error', error);
         })
-    };
+    }; */
 
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.title}>DEVICE</Text>
-                <Ionicons
-                name="home"
-                style={styles.home}
-                onPress={() => navigation.navigate("Home")}
-                />
-            </View>
-            <View style={styles.body}>
-                <View style={styles.busContainer}>
-                    <View style={styles.searchBox}>
-                        <TextInput
-                        style={styles.inputBox}
-                        onChangeText={(text) => inputDeviceId(text)}
-                        onSubmitEditing={sendDevice}
-                        placeholder="등록할 기기의 시리얼 번호를 입력해주세요."
-                        returnKeyType="done"
-                        />
-                        <FontAwesome5
-                        name="search"
-                        size={28}
-                        color="#555555"
-                        onPress={() => {
-                            getBusData();
-                        }}
-                        />
-                    </View>
-                </View>
-                <View style={styles.footer}>
-                    <BottomBar />
-                </View>
-            </View>
-        </View>
+      <View style={styles.container}>            
+
+      <View style={styles.inputView}>
+          <TextInput
+              style={styles.textInput}
+              placeholder="시리얼 번호"
+              placeholderTextColor="#003f5c"
+              onChangeText={(deviceId)=>setDeviceId(deviceId)} />
+      </View>
+
+      <TouchableOpacity style={styles.loginBtn} onPress={()=>sendDevice()}>
+          <Text style={{color: "white"}}>기기등록</Text>
+      </TouchableOpacity>     
+
+  </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
       flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    header: {
-      flex: 0.3,
       backgroundColor: "#fff3bd",
-      color: "white",
-      flexDirection: "row",
       alignItems: "center",
-      justifyContent: "flex-end",
-      paddingHorizontal: 10,
-    },
-    body: {
-      flex: 2.0,
-      backgroundColor: "#fff3bd",
-    },
-    footer: {
-      flex: 0.3,
-      backgroundColor: "#fff3bd",
-    },
-    title: {
-      fontSize: 44,
-      fontWeight: "800",
-      color: "#e5e5e5",
-      marginTop: 40,
-      marginRight: 106,
-    },
-    home: {
-      marginTop: 44,
-      fontSize: 30,
-      fontWeight: "800",
-      color: "#e5e5e5",
-    },
-  
-    busContainer: {
-      backgroundColor: "#eeeeee",
-      borderRadius: 25,
-      height: 70,
-      paddingHorizontal: 20,
-      paddingVertical: 10,
-      marginHorizontal: 6,
-      marginTop: 10,
-    },
-    searchBox: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "left",
-      paddingVertical: 10,
-    },
-    inputBox: {
-      width: 290,
+      justifyContent: "center"
+  },
+  image: {
+      marginBottom: 40
+  },
+  inputView: {
+      backgroundColor: "white",
+      borderRadius: 30,
+      width: "70%",
+      height: 45,
+      marginBottom: 20,
+      alignItems: "center"
+  },
+  textInput:{
+      height: 50,
+      flex: 1,
+      padding: 10,
+      marginLeft: 5
+  },
+  forgot_button: {
       height: 30,
-      backgroundColor: "#e2e2e2",
-      marginRight: 10,
-      fontSize: 24,
-      fontWeight: "600",
-    },
-    busNumList: {
-      backgroundColor: "#eeeeee",
+      marginBottom: 30
+  },
+  loginBtn: {
+      width: "40%",
       borderRadius: 25,
-      height: 70,
-      paddingHorizontal: 20,
-      paddingVertical: 10,
-      marginHorizontal: 6,
-      marginTop: 10,
-      flexDirection: "row",
-      justifyContent: "space-between",
+      height: 50,
       alignItems: "center",
-    },
-    busNumItem: {
-      fontSize: 18,
-      fontWeight: "600",
-    },
-    busStationContainer: {
-      paddingHorizontal: 30,
-      marginHorizontal: 6,
-      backgroundColor: "#eeeeee",
-      borderRadius: 10,
-    },
-    busStationList: {
-      position: "relative",
-      backgroundColor: "#eeeeee",
-      paddingHorizontal: 40,
-      paddingVertical: 14,
-      marginHorizontal: 6,
-      borderLeftWidth: 2,
-      borderLeftColor: "red",
-      borderBottomWidth: 1,
-      borderBottomColor: "#e2e2e2",
-  
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-    },
-    busStationItem: { fontSize: 18, fontWeight: "600" },
-  });
+      justifyContent: "center",
+      marginTop: 40,
+      backgroundColor: "black"
+  }
+})

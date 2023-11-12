@@ -5,7 +5,7 @@ import * as Location from "expo-location";
 import { MaterialCommunityIcons, Fontisto, Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getAppId, BASE_IP } from "../../service";
+import { getAppId, BASE_IP } from "../../service.js";
 import { useNavigation } from "@react-navigation/native";
 import { userId } from "../Splash/Login.js";
 
@@ -13,7 +13,7 @@ import { userId } from "../Splash/Login.js";
 const icons = {
   Clouds: "cloudy",
   Clear: "day-sunny",
-  Atmosphere: "cloudy-gusts",
+  Atmosphere: "cloudy-gusts", 
   Snow: "snowflake",
   Rain: "rains",
   Drizzle: "rain",
@@ -128,8 +128,9 @@ export default function WeatherInfo() {
         setCurrentTemp(temp);
         setCondition(condition);
         setWeatherId(weatherIconId);
-
-        axios.post("http://ceprj.gachon.ac.kr:60004/weather/create", 
+        
+        if (city != "Loading...") {
+          axios.post("http://ceprj.gachon.ac.kr:60004/weather/create", 
                {
                     "longitude": longitudeApi,
                     "latitude": latitudeApi,
@@ -152,7 +153,8 @@ export default function WeatherInfo() {
             }).catch(function(err){
                 console.log("weatherInfo error", err);
             })
-      } catch (error) {
+         } 
+        } catch (error) {
         console.log("weather error", error);
       }
     /*
@@ -172,13 +174,11 @@ export default function WeatherInfo() {
     */
   };
 
-  /* useEffect(() => {
-    getAppId(setAppId);
+  useEffect(() => {
     setLocation();
-  }, []); */
+  }, []);
 
   const reloadWeather = () => {
-    setDays([]);
     setLocation();
   };
 
@@ -250,7 +250,7 @@ export default function WeatherInfo() {
               style={styles.home}
               size={32}
               color="#555555"
-              onPress={() => setLocation()}
+              onPress={() => reloadWeather()}
           />
         </View>
       </View>

@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { StyleSheet, View, TouchableHighlight, Text, TextInput, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-export var userId;
-export var userPwd;
-export var userName;
-export var userEmail;
+export var userId = "";
+export var userPassword = "";
+export var userName = "";
+export var userEmail = "";
 
 export default function CheckInfo() {
     const navigation = useNavigation();
@@ -28,11 +28,11 @@ export default function CheckInfo() {
                 }
             ).then(function(resp){
                 console.log(resp.data);
-                userId = resp.data.userId;
-                userPwd = resp.data.userPassword;
-                userName = resp.data.name;
-                userEmail = resp.data.email;
                 if(resp.data.status === 200) {
+                    userId = resp.data.userId;
+                    userPassword = resp.data.userPassword;
+                    userName = resp.data.name;
+                    userEmail = resp.data.email;
                     Alert.alert('회원정보',
                                 "회원정보 수정 화면으로 이동합니다.",
                                 [{

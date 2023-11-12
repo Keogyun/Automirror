@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import { StyleSheet, View, TouchableHighlight, Text, TextInput, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-var question = "hi";
-var answer = "hello";
 var password = "";
 
 export default function Register() {
@@ -72,8 +70,6 @@ export default function Register() {
                     "userPassword":password,
                     "name":name,
                     "email":email,
-                    "securityQuestion":question,
-                    "securityQuestionAnswer":answer,
                 }
             ).then(function(resp){
                 console.log(resp.data);

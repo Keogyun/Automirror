@@ -24,7 +24,7 @@ export default function Unregister() {
                     }
                 }
             ).then(function(resp){
-                console.log(resp);
+                console.log(resp.data);
                 if(resp.data.status === 200) {
                     Alert.alert('회원탈퇴',
                                 "회원탈퇴 성공했습니다.",
