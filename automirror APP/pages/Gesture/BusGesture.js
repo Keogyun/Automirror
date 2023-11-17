@@ -2,24 +2,23 @@ import {
     StyleSheet,
     Text,
     View,
-    ScrollView,
     Dimensions,
-    Modal,
     TouchableOpacity,
     Alert
   } from "react-native";
-  import axios from "axios";
-  import { useNavigation } from "@react-navigation/native";
-  import { Ionicons, AntDesign } from "@expo/vector-icons";
-  import { SelectList } from "react-native-dropdown-select-list";
-  const { width: SCREEN_WIDTH } = Dimensions.get("window");
+import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
+import { deviceAddress } from "../Splash/Login";
+
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
   
 
 export default function BusGesture() {
     const navigation = useNavigation();
 
     const busCapture = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=bus-capture")
+        axios.get(`${deviceAddress}/api/gesture?message=bus-capture`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -39,12 +38,8 @@ export default function BusGesture() {
 
     
     const busCheck = () => {
-        Alert.alert( 
-            '버스 제스처 확인', '제스처 확인이 끝나면 확인 종료를 눌러주세요.', [ 
-                  {text: '확인 종료', onPress: () => navigation.navigate("BusGesture")/*busCheckExit()*/}, 
-            ]
-          );
-        /*axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=bus-check")
+        console.log("버스 제스처 확인");
+        axios.get(`${deviceAddress}/api/gesture?message=bus-check`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -62,11 +57,11 @@ export default function BusGesture() {
                       .catch((error) => {
                         console.error("네트워크 오류 발생:", error);
                         navigation.navigate('BusGesture');
-                      });*/
+                      });
     }
 
     const busCheckExit = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=bus-check-exit")
+        axios.get(`${deviceAddress}/api/gesture?message=bus-check-exit`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -84,7 +79,7 @@ export default function BusGesture() {
     }
 
     const quitGesture = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=config-exit")
+        axios.get(`${deviceAddress}/api/gesture?message=config-exit`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -126,7 +121,8 @@ export default function BusGesture() {
                   marginBottom={20}
                 />
                 <View style={styles.top}>
-                  <TouchableOpacity onPress={()=> navigation.navigate("BusGestureCapture")// busCapture()
+                  <TouchableOpacity onPress={()=> // navigation.navigate("BusGestureCapture")
+                  busCapture()
                   }>
                     <Text style={styles.text}>버스 제스처 촬영</Text>      
                   </TouchableOpacity>

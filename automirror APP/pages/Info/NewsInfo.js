@@ -34,12 +34,6 @@ export default function NewsInfo() {
             }).catch(function(err){
                 Alert.alert("newAPI error", err.message);
             })
-    /*const res = await axios.get(`${BASE_IP}/news/getNews?category=all`);
-    const json = JSON.parse(res.data.result);
-    json.articles.forEach((value) => {
-      value.url;
-    });
-    setNews(json.articles);*/
   };
 
   return (

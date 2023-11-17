@@ -1,66 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   Image,
-  Button,
   Dimensions,
   TouchableOpacity
 } from "react-native";
-import { WebView } from 'react-native-webview';
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BASE_IP } from "../../service";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
-const runFirst = `window.ReactNativeWebView.postMessage("this is message from web");`;
 
 export default function Splash() {
-  // const [appId, setAppId] = useState("");
-  // const [userId, setUserId] = useState(false);
+
 
   const navigation = useNavigation(); 
-
-  {/*function LogInProgress(data) {
-
-    // access code는 url에 붙어 장황하게 날아온다.
-
-    // substringd으로 url에서 code=뒤를 substring하면 된다.
-
-
-
-
-  
-  const getData = async () => {
-    const value = await AsyncStorage.getItem("@storage_Id");
-
-    if (value == null) {
-    } else {
-      setAppId(value);
-      const setHome = setTimeout(() => {
-        navigation.reset({ routes: [{ name: "Home" }] });
-      }, 5000);
-    }
-    // console.log(value);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const sendData = async () => {
-    const date = Date.now().toString();
-    const res = await axios.post(`${BASE_IP}/user/addUser`, {
-      macId: null,
-      appId: date,
-    });
-
-    await AsyncStorage.setItem("@storage_Id", date);
-  };
-*/}
 
   return (
     <View style={styles.container}>
@@ -87,37 +41,7 @@ export default function Splash() {
         <TouchableOpacity onPress={()=> navigation.navigate("FindPw")}>
             <Text style={styles.text}>비밀번호 찾기</Text>  
         </TouchableOpacity>
-        {/*<TouchableOpacity
-          onPress={() => navigation.navigate("KakaoLogin", { screen: "KakaoLogin" })}
-          style={styles.NextBottom}
-        >
-          <Image 
-          source={require("automirror/assets/images/login.png")}
-          />   
-  </TouchableOpacity>*/}
       </View>
-      {/*{appId !== "" ? (
-        <View style={styles.footer}>
-          <Text style={styles.text}>
-            비서를 호출하는 중입니다. 잠시만 기다려주세요...
-          </Text>
-          <Button title="ID가 없으신가요 ?" onPress={() => setId(false)} />
-        </View>
-      ) : (
-        <View style={styles.footer}>
-          <TextInput
-            style={styles.input}
-            placeholder="- 표시를 포함해서 작성해주세요."
-            onSubmitEditing={() => sendData()}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="- 표시를 포함해서 작성해주세요."
-            onSubmitEditing={() => sendData()}
-          />
-          <Button title="로그인" onPress={() => sendData()} />
-        </View>
-      )} */}
     </View>
   );
 }

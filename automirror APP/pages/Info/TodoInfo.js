@@ -1,16 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Text, StyleSheet, View, Dimensions, Platform, ScrollView, Alert } from 'react-native';
 import BottomBar from "../Home/components/BottomBar.js";
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
 import uuid from "react-native-uuid";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userId } from "../Splash/Login";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry.js';
 
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("window");
@@ -20,30 +17,31 @@ export default function TodoInfo() {
   
     const addTodo = text => {
       setTodos([...Todos,
-        {id: uuid.v4(), textValue: text, checked: false}, // check true면 완료 
+        {id: uuid.v4(), textValue: text, checked: false} // check true면 완료 
       ]);
+      console.log(`Todos: ${Todos}`);
     };
     
     const addTodoApi = text => {
       setTodos([...Todos,
-        {id: uuid.v4(), textValue: text, checked: false}, // check true면 완료 
+        {id: uuid.v4(), textValue: text, checked: false} // check true면 완료 
       ]);
-      setTodo(text);
+      console.log(`Todos: ${Todos}`);
+      postTodo(text);
     };
 
-    const onRemove = deleteId => e => {
+    const onRemove = deleteId => {
       var text = "";
       Todos.map(Todo =>
         Todo.id === deleteId ? text = Todo.textValue : text = ""
       );
       setTodos(Todos.filter((Todo) => {Todo.id !== deleteId}));
-
       console.log(Todos);
-      console.log(text);
+      console.log(text); 
       deleteTodo(text);
     };
   
-    const onToggle = id => e => {
+    const onToggle = id => {
       setTodos(
         Todos.map(Todo =>
           Todo.id === id ? {...Todo, checked: !Todo.checked} : Todo,
@@ -51,30 +49,32 @@ export default function TodoInfo() {
       );
     };
     
-    const getTodo = () => {
+    const getTodo = useCallback(() => {
       axios.post("http://ceprj.gachon.ac.kr:60004/todo/get",
                {
                     "userId": userId
                 }
             ).then(function(resp){
                 if(resp.data.status === 200) {
+                  console.log("todo 정보 가져오기");
+                  // setTodos([]);
                   console.log(resp.data);
                   var array = resp.data.todos;
+                  
                   console.log(array);
-                  console.log(Todos);
+          
                   /*array.forEach((data) => {
                     addTodo(data.todoTask);
                   });*/
                   array.map((data) => {
                     addTodo(data.todoTask);
-                  })
-                  Alert.alert('todo 정보',
+                  });
+                  console.log(Todos);
+                  /*Alert.alert('todo 정보',
                               "저장된 todo정보를 받아왔습니다.",
                               [{
                                   text:'확인',   
-                              }]);
-                  
-
+                              }]);*/
                 }
                 else{
                     Alert.alert("todo 정보","등록된 todo 정보가 없거나 불러오기에 실패했습니다.");
@@ -83,9 +83,9 @@ export default function TodoInfo() {
             }).catch(function(err){
                 console.log("getTodo error", err);
             })
-    };
+    }, []);
 
-    const setTodo = (text) => {
+    const postTodo = (text) => {
       
       axios.post("http://ceprj.gachon.ac.kr:60004/todo/add", 
                {
@@ -129,11 +129,12 @@ export default function TodoInfo() {
             ).then(function(resp){
                 console.log(resp.data);
                 if(resp.data.status === 200) {
-                    Alert.alert('todo 정보',
+                  console.log("일정 삭제");
+                    /*Alert.alert('todo 정보',
                                 "todo 정보 삭제 성공했습니다.",
                                 [{
                                    text:'확인',   
-                                }]);
+                                }]);*/
                     // navigation.navigate("TodoInfo");
                 }
                 else{

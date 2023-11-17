@@ -28,13 +28,13 @@ export default function BottomBar() {
           size={32}
           color="black"
           onPress={() =>
-            navigation.reset({ routes: [{ name: "TodoInfo" }] })
+            navigation.reset({ routes: [{ name: "Todo" }] })
           }
         />
         <Text
           style={{ color: "#555555", fontWeight: "600", marginTop: 4 }}
           onPress={() =>
-            navigation.reset({ routes: [{ name: "TodoInfo" }] })
+            navigation.reset({ routes: [{ name: "Todo" }] })
           }
         >
           일정
@@ -60,15 +60,13 @@ export default function BottomBar() {
           size={32}
           color="black"
           onPress={() =>
-            navigation.navigate("NewsInfo")
-            // navigation.reset({ routes: [{ name: "NewsInfo" }] })
+            navigation.reset({ routes: [{ name: "NewsInfo" }] })
           }
         />
         <Text
           style={{ color: "#555555", fontWeight: "600", marginTop: 4 }}
           onPress={() =>
-            navigation.navigate("NewsInfo")
-            // navigation.reset({ routes: [{ name: "NewsInfo" }] })
+            navigation.reset({ routes: [{ name: "NewsInfo" }] })
           }
         >
           뉴스

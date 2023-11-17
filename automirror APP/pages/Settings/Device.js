@@ -8,7 +8,6 @@ export default function Device() {
     const navigation = useNavigation();
     const [deviceId, setDeviceId] = useState("");
     var domain = "";
-    // const userData = loginData();
 
     function sendDevice(){
       if(deviceId.trim() == ""){
@@ -24,13 +23,20 @@ export default function Device() {
                       console.log("시리얼번호 전송");
                       console.log(resp.data);
                       domain = resp.data.deviceAddress;
-                      // AsyncStorage.setItem('device',JSON.stringify(deviceId)); 
+      
                       axios.get(`${domain}/api/saveMessage?message=${userId}`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
                           console.log("기기 등록 성공.");
-                          Alert.alert("기기등록", "기기등록 성공했습니다.");
+                          // Alert.alert("기기등록", "기기등록 성공했습니다. 다시 로그인해주세요.");
+                          Alert.alert( 
+                            '기기등록', '기기등록 성공했습니다. 다시 로그인해주세요.', [ 
+                                  {text: '확인', onPress: () => navigation.navigate("Splash")
+                                }, 
+                            ]
+                          );
+                      
                         } else {
                           console.error("기기등록 중 오류 발생:", response.status);
                           Alert.alert("기기등록", "기기등록 실패했습니다.");
@@ -51,31 +57,6 @@ export default function Device() {
               })
       }
   };
-    /*const sendDevice = async () => {
-        axios ({
-        method: 'post',
-        url: 'ceprj.gachon.ac.kr:60004/',
-        params: {
-            device_id: deviceID
-        },
-        }).then((response) => {  
-          console.log("deviceID sent");
-          console.log(response);
-          axios ({
-            method: 'post',
-            url: 'ceprj.gachon.ac.kr:60004/',
-            params: {
-              userId: userData.id
-            }, 
-          }).then((resp) => {
-            console.log("userId sent");      
-          }).catch(function (error) {
-            console.log("userId error", error);
-          })
-        }).catch(function (error) {
-          console.log('deviceId error', error);
-        })
-    }; */
 
     return (
       <View style={styles.container}>            

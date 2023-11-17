@@ -1,25 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Dimensions,
-  Modal,
   TouchableOpacity,
   Alert
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
-import { SelectList } from "react-native-dropdown-select-list";
+import { deviceAddress } from "../Splash/Login";
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export default function WeatherGesture() {
     const navigation = useNavigation();
 
     const weatherCapture = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=weather-capture")
+        axios.get(`${deviceAddress}/api/gesture?message=weather-capture`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -39,12 +37,8 @@ export default function WeatherGesture() {
 
     
     const weatherCheck = () => {
-      Alert.alert( 
-        '날씨 제스처 확인', '제스처 확인이 끝나면 확인 종료를 눌러주세요.', [ 
-              {text: '확인 종료', onPress: () => navigation.navigate("WeatherGesture")/*weatherCheckExit()*/}, 
-        ]
-      );
-        /*axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=weather-check")
+      console.log("날씨 제스처 확인");
+      axios.get(`${deviceAddress}/api/gesture?message=weather-check`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -62,11 +56,11 @@ export default function WeatherGesture() {
                       .catch((error) => {
                         console.error("네트워크 오류 발생:", error);
                         navigation.navigate('WeatherGesture');
-                      });*/
+                      });
     }
 
     const weatherCheckExit = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=weather-check-exit")
+        axios.get(`${deviceAddress}/api/gesture?message=weather-check-exit`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -84,7 +78,7 @@ export default function WeatherGesture() {
     }
 
     const quitGesture = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=config-exit")
+        axios.get(`${deviceAddress}/api/gesture?message=config-exit`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -126,7 +120,8 @@ export default function WeatherGesture() {
                   marginBottom={20}
                 />
                 <View style={styles.top}>
-                  <TouchableOpacity onPress={()=> navigation.navigate("WeatherGestureCapture")// weatherCapture
+                  <TouchableOpacity onPress={()=>
+                  weatherCapture()
                   }>
                     <Text style={styles.text}>날씨 제스처 촬영</Text>      
                   </TouchableOpacity>

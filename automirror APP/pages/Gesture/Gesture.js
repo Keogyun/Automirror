@@ -1,31 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Dimensions,
-  Modal,
   Alert
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
-import { SelectList } from "react-native-dropdown-select-list";
-
-import TodoGesture from "./TodoGesture.js";
+import { deviceAddress } from "../Splash/Login.js";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export default function Gesture() {
     const navigation = useNavigation();
-    const [showModalKeyword, setShowModalKeyword] = useState(false);
-    const [showModalTime, setShowModalTime] = useState(false);
-    const [activeTab, setActiveTab] = useState("C");
-    const [selected, setSelected] = useState("");
 
     const weatherGesture = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=weather-gesture")
+        axios.get(`${deviceAddress}/api/gesture?message=weather-gesture`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -45,7 +37,7 @@ export default function Gesture() {
     }
 
     const todoGesture = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=todo-gesture")
+        axios.get(`${deviceAddress}/api/gesture?message=todo-gesture`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -65,7 +57,7 @@ export default function Gesture() {
     }
 
     const busGesture = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=bus-gesture")
+        axios.get(`${deviceAddress}/api/gesture?message=bus-gesture`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -85,7 +77,7 @@ export default function Gesture() {
     }
 
     const newsGesture = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=news-gesture")
+        axios.get(`${deviceAddress}/api/gesture?message=news-gesture`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -105,7 +97,7 @@ export default function Gesture() {
     }
     
     const quitGesture = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=config-exit")
+        axios.get(`${deviceAddress}/api/gesture?message=config-exit`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -130,7 +122,7 @@ export default function Gesture() {
             <Ionicons
             name="home"
             style={styles.home}
-            onPress={() => quitGesture()/*navigation.navigate("Home")*/}
+            onPress={() => quitGesture()}
             />
         </View>
 
@@ -142,8 +134,8 @@ export default function Gesture() {
                     name="rightcircleo"
                     size={24}
                     color="black"
-                    onPress={() => navigation.navigate("WeatherGesture")
-                      // weatherGesture()
+                    onPress={() =>
+                      weatherGesture()
                     }
                 />
             </View>
@@ -154,8 +146,7 @@ export default function Gesture() {
                     size={24}
                     color="black"
                     onPress={() => {
-                      navigation.navigate("TodoGesture")
-                      // TodoGesture();
+                      todoGesture();
                     }}
 />
             </View>
@@ -166,8 +157,7 @@ export default function Gesture() {
                     size={24}
                     color="black"
                     onPress={() => {
-                      navigation.navigate("BusGesture")
-                      // busGesture();
+                      busGesture();
                     }}
                     />
             </View>
@@ -178,8 +168,7 @@ export default function Gesture() {
                     size={24}
                     color="black"
                     onPress={() => 
-                      navigation.navigate("NewsGesture")
-                      // newsGesture()
+                      newsGesture()
                     }
                 />
             </View>
@@ -194,100 +183,9 @@ export default function Gesture() {
                     }
                 />
             </View>
-            {/*
-            <View>
-            <Modal
-                animationType={"fade"}
-                transparent={true}
-                visible={showModalKeyword}
-                onRequestClose={() => {
-                console.log("Modal has been closed.");
-                }}
-            >
-                <View style={styles.modalContainer}>
-                <View style={styles.keyword}>
-                    <View style={styles.keywordContainer}>
-                    <View style={styles.category}>
-                        <Tab activeTab={activeTab} setActiveTab={setActiveTab} />
-                    </View>
-                    <View style={styles.contents}>
-                        <ScrollView style={{ marginTop: 20 }}>
-                        {activeTab == "C" ? <CalendarTab /> : null}
-                        {activeTab == "W" ? <WeatherTab /> : null}
-                        {activeTab == "B" ? <BusTab /> : null}
-                        {activeTab == "N" ? <NewsTab /> : null}
-                        </ScrollView>
-                    </View>
-                    <AntDesign
-                        style={{
-                        ...styles.keywordContainer,
-                        marginTop: -46,
-                        marginRight: 4,
-                        height: 40,
-                        }}
-                        name="closecircle"
-                        size={26}
-                        color="#666666"
-                        onPress={() => {
-                        setShowModalKeyword(!showModalKeyword);
-                        }}
-                    />
-                    </View>
-                </View>
-                </View>
-            </Modal>
-            </View>
-            <View>
             
-            <Modal
-                animationType={"fade"}
-                transparent={true}
-                visible={showModalTime}
-                onRequestClose={() => {
-                console.log("Modal has been closed.");
-                }}
-            >
-                <View style={styles.modalContainer}>
-                <View style={styles.keyword}>
-                    <View style={styles.keywordContainer}>
-                    <View
-                        style={{
-                        ...styles.category,
-                        width: "10%",
-                        borderRightWidth: 0,
-                        }}
-                    ></View>
-                    <View style={{ ...styles.contents, width: "66%" }}>
-                        <SelectList
-                        setSelected={(val) => setSelected(val)}
-                        data={timeline}
-                        save="value"
-                        placeholder="센서 작동 시간을 선택하세요."
-                        />
-                    </View>
-                    <AntDesign
-                        style={{
-                        ...styles.keywordContainer,
-                        marginTop: -46,
-                        marginRight: 4,
-                        height: 40,
-                        }}
-                        name="closecircle"
-                        size={26}
-                        color="#666666"
-                        onPress={() => {
-                        setShowModalTime(!showModalTime);
-                        }}
-                    />
-                    </View>
-                </View>
-                </View>
-            </Modal>
-            </View> */}
         </View>
-        {/*<View style={styles.footer}>
-            <BottomBar />
-          </View>*/}
+        
       </View>
     );
 };

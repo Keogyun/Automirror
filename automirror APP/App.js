@@ -3,21 +3,10 @@ import React from "react";
 import "react-native-gesture-handler";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { WebView } from "react-native-webview";
 import Splash from "../automirror APP/pages/Splash/Splash.js";
 import Home from "../automirror APP/pages/Home/Home.js";
 import Settings from "../automirror APP/pages/Settings/Settings.js";
-import Guide from "../automirror APP/pages/Guide/Guide.js";
-import Calendar from "../automirror APP/pages/Home/components/Calendar.js";
-import CalendarDetails from "./pages/Info/CalendarDetails.js";
-import Weather from "../automirror APP/pages/Home/components/Weather.js";
-import WeatherDetails from "./pages/Info/WeatherDetails.js";
 import WeatherInfo from "./pages/Info/WeatherInfo.js";
-import Bus from "../automirror APP/pages/Home/components/Bus.js";
-import BusDetails from "./pages/Info/BusDetails.js";
-import News from "../automirror APP/pages/Home/components/News.js";
-import NewsDetails from "./pages/Info/NewsDetails.js";
-import KakaoLogin from "./pages/Splash/KakaoLogin.js";
 import Device from "./pages/Settings/Device.js";
 import Register from "./pages/Splash/Register.js";
 import Login from "./pages/Splash/Login.js";
@@ -38,8 +27,8 @@ import WeatherGestureCapture from "./pages/Gesture/WeatherGestureCapture.js";
 import TodoGestureCapture from "./pages/Gesture/TodoGestureCapture.js";
 import BusGestureCapture from "./pages/Gesture/BusGestureCapture.js";
 import NewGestureCapture from "./pages/Gesture/NewsGestureCapture.js";
-import NewInfo from "./pages/Info/NewsInfo.js";
 import NewsInfo from "./pages/Info/NewsInfo.js";
+import Todo from "./pages/Info/Todo.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,7 +40,6 @@ export default function App() {
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Splash" component={Splash} />
-        <Stack.Screen name="KakaoLogin" component={KakaoLogin} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="FindId" component={FindId} />
@@ -62,19 +50,11 @@ export default function App() {
         <Stack.Screen name="MemberInfo" component={MemberInfo} />
         <Stack.Screen name="CheckInfo" component={CheckInfo} />
         <Stack.Screen name="Unregister" component={Unregister} />
-        <Stack.Screen name="Guide" component={Guide} />
         <Stack.Screen name="Device" component={Device} />
-        <Stack.Screen name="Calendar" component={Calendar} />
-        <Stack.Screen name="CalendarDetails" component={CalendarDetails} />
         <Stack.Screen name="TodoInfo" component={TodoInfo} />
+        <Stack.Screen name="Todo" component={Todo} />
         <Stack.Screen name="WeatherInfo" component={WeatherInfo} />
-        <Stack.Screen name="Weather" component={Weather} />
-        <Stack.Screen name="WeatherDetails" component={WeatherDetails} />
         <Stack.Screen name="BusInfo" component={BusInfo} />
-        <Stack.Screen name="Bus" component={Bus} />
-        <Stack.Screen name="BusDetails" component={BusDetails} />
-        <Stack.Screen name="News" component={News} />
-        <Stack.Screen name="NewsDetails" component={NewsDetails} />
         <Stack.Screen name="Gesture" component={Gesture} />
         <Stack.Screen name="WeatherGesture" component={WeatherGesture} />
         <Stack.Screen name="TodoGesture" component={TodoGesture} />

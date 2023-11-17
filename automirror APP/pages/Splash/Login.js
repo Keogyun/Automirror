@@ -8,7 +8,6 @@ import {
     TextInput, 
     Text, 
     TouchableOpacity,    
-    Button,
     Alert
 } from "react-native";
 
@@ -16,6 +15,7 @@ export var userId = "";
 export var userPassword = "";
 export var userName = "";
 export var userEmail = "";
+export var deviceAddress = "";
 
 export default function Login() {
     const navigation = useNavigation();
@@ -39,13 +39,17 @@ export default function Login() {
                     if(resp.data.status === 200) {
                         console.log("로그인 되었습니다");
                         console.log(resp.data);
-                        AsyncStorage.setItem('login',JSON.stringify(resp.data)); 
+                    
                         userId = resp.data.userId;
                         userPassword = resp.data.userPassword;
                         userName = resp.data.name;
                         userEmail = resp.data.email;
+                       
+                        if (resp.data.deviceAddress != null) {
+                            deviceAddress = resp.data.deviceAddress;
+                            console.log(deviceAddress);
+                        }
                         console.log(userId);
-                        // loginData();
                         navigation.navigate('Home');
                         
                     }
