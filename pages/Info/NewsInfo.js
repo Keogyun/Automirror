@@ -34,12 +34,6 @@ export default function NewsInfo() {
             }).catch(function(err){
                 Alert.alert("newAPI error", err.message);
             })
-    /*const res = await axios.get(`${BASE_IP}/news/getNews?category=all`);
-    const json = JSON.parse(res.data.result);
-    json.articles.forEach((value) => {
-      value.url;
-    });
-    setNews(json.articles);*/
   };
 
   return (
@@ -87,7 +81,7 @@ const styles = StyleSheet.create({
       },
       header: {
         flex: 0.2,
-        backgroundColor: "#fff3bd",
+        backgroundColor: "#f6ac4b",
         color: "black",
         width: SCREEN_WIDTH,
         flexDirection: "row",
@@ -97,12 +91,12 @@ const styles = StyleSheet.create({
       },
       body: {
         flex: 2.0,
-        backgroundColor: "#fff3bd",
+        backgroundColor: "#f6ac4b",
         width: SCREEN_WIDTH,
       },
       footer: {
         flex: 0.3,
-        backgroundColor: "#fff3bd",
+        backgroundColor: "#f6ac4b",
         width: SCREEN_WIDTH,
       },
       title: {

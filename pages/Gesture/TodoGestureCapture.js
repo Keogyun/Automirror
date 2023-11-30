@@ -1,30 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Dimensions,
-  Modal,
   TouchableOpacity,
   Alert
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
-import { SelectList } from "react-native-dropdown-select-list";
+import { deviceAddress } from "../Splash/Login";
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export default function TodoGestureCapture() {
     const navigation = useNavigation();
 
     const todoCaptureOk = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=todo-capture-ok")
+        axios.get(`${deviceAddress}/api/gesture?message=todo-capture-ok`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
                           console.log("일정 제스처 촬영 확인");
-                          Alert.alert("일정 제스처 촬영 확인", "일정 제스처 촬영 사진 확인");
+                          Alert.alert( 
+                            '일정 제스처 촬영 확인', '일정 제스처 촬영 사진 확인', [ 
+                                  {text: '확인', onPress: () => navigation.navigate("TodoGesture")}, 
+                            ]
+                          );
+                          // Alert.alert("일정 제스처 촬영 확인", "일정 제스처 촬영 사진 확인");
+                          // navigation.navigate("TodoGesture");
                         } else {
                           console.error("일정 제스처 촬영 확인 오류:", response.status);
                           Alert.alert("일정 제스처 촬영 확인", "일정 제스처 촬영 확인 실패");
@@ -37,12 +41,17 @@ export default function TodoGestureCapture() {
     }
 
     const todoCaptureNo = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=todo-capture-no")
+        axios.get(`${deviceAddress}/api/gesture?message=todo-capture-no`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
                           console.log("일정 제스처 촬영 사진 반려");
-                          Alert.alert("일정 제스처 촬영", "일정 제스처 촬영 사진 반려");
+                          Alert.alert( 
+                            '일정 제스처 촬영 반려', '일정 제스처 촬영 사진 반려', [ 
+                                  {text: '확인', onPress: () => navigation.navigate("TodoGesture")}, 
+                            ]
+                          );
+                          // Alert.alert("일정 제스처 촬영", "일정 제스처 촬영 사진 반려");
                         } else {
                           console.error("일정 제스처 촬영 반려 오류:", response.status);
                           Alert.alert("일정 제스처 촬영 반려", "일정 제스처 촬영 사진 반려 실패");
@@ -53,6 +62,25 @@ export default function TodoGestureCapture() {
                         navigation.navigate('TodoGesture');
                       });
     }
+
+    const quitGesture = () => {
+      axios.get(`${deviceAddress}/api/gesture?message=config-exit`)
+                    .then((response) => {
+                      console.log(response.status);
+                      if (response.status === 200) {
+                        console.log("제스처 설정 종료");
+                        Alert.alert("제스처 설정", "메인 페이지로 이동");
+                        navigation.navigate("Home");
+                      } else {
+                        console.error("제스처 설정 종료 오류:", response.status);
+                        Alert.alert("제스처 설정", "제스처 설정 종류 실패");
+                      }
+                    })
+                    .catch((error) => {
+                      console.error("네트워크 오류 발생:", error);
+                      navigation.navigate('Gesture');
+                    });
+  }
 
     return (
       <View style={styles.container}>
@@ -99,11 +127,11 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: '#fff3bd',
+      backgroundColor: '#f6ac4b',
     },
     header: {
       flex: 0.2,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       // color: "#A3C1C6",
       color: "white",
       width: SCREEN_WIDTH,
@@ -114,7 +142,7 @@ const styles = StyleSheet.create({
     },
     body: {
       flex: 2.0,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       width: SCREEN_WIDTH,
       justifyContent: "center",
       alignItems: "center",
@@ -122,7 +150,7 @@ const styles = StyleSheet.create({
     },
     footer: {
       flex: 0.3,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       width: SCREEN_WIDTH,
     },
     title: {
@@ -140,7 +168,7 @@ const styles = StyleSheet.create({
       color: "black",
     },
     flexbox: {
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       borderRadius: 20,
       height: 60,
       paddingHorizontal: 20,

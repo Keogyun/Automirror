@@ -48,15 +48,6 @@ export default function BusInfo() {
                 Alert.alert("busInput error", err.message);
             })
     }
-    /*const res = await axios.get(
-      `http://apis.data.go.kr/641000/busrouteservice/getBusRouteList?serviceKey=${API_KEY}&keyword=${inputBus}`
-    );
-    const result = converter.xml2json(res);
-    const busNum = result.data.busList[0].routeName;
-    const busStation = result.data.busList[0].routeId;
-    setNumOfBus(result.data.busList);
-    setRouteId(busStation.toString());
-    setLineNumber(inputBus.toString());*/
   };
 
   const getStationListAPI = async () => {
@@ -68,21 +59,12 @@ export default function BusInfo() {
                 console.log("정류장 조회");
                 console.log(res.data);
                 console.log("================");
-                // console.log(res.data.busStationList);
-                // console.log(res.data.busList[0].routeName);
-                // console.log(res.data.busList[0].routeId);
-                // console.log("================");
+                
                 setBusStations(res.data.busRouteStationList);
             }).catch(function(err){
                 Alert.alert("busStation error", err.message);
         })
-    /*const res = await axios.get(`http://apis.data.go.kr/641000/busrouteservice/getBusRouteInfoItem?serviceKey=${API_KEY}&keyword=${routeId}`);
-    console.log("================");
-    console.log(res.data.busStationList);
-    // console.log(res.data.busList[0].routeName);
-    // console.log(res.data.busList[0].routeId);
-    console.log("================");
-    setBusStations(res.data.busStationList);*/
+   
   };
 
   const createBusInfo = async (stationName, stationId, staOrder) => {
@@ -294,7 +276,7 @@ const styles = StyleSheet.create({
     },
     header: {
       flex: 0.2,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       color: "black",
       width: SCREEN_WIDTH,
       flexDirection: "row",
@@ -304,12 +286,12 @@ const styles = StyleSheet.create({
     },
     body: {
       flex: 2.0,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       width: SCREEN_WIDTH,
     },
     footer: {
       flex: 0.3,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       width: SCREEN_WIDTH,
     },
     title: {

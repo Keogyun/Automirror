@@ -2,16 +2,14 @@ import {
     StyleSheet,
     Text,
     View,
-    ScrollView,
     Dimensions,
-    Modal,
     TouchableOpacity,
     Alert
   } from "react-native";
   import axios from "axios";
   import { useNavigation } from "@react-navigation/native";
   import { Ionicons, AntDesign } from "@expo/vector-icons";
-  import { SelectList } from "react-native-dropdown-select-list";
+  import { deviceAddress } from "../Splash/Login";
   const { width: SCREEN_WIDTH } = Dimensions.get("window");
   
 
@@ -19,7 +17,7 @@ export default function NewsGesture() {
     const navigation = useNavigation();
 
     const newsCapture = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=news-capture")
+        axios.get(`${deviceAddress}/api/gesture?message=news-capture`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -39,12 +37,9 @@ export default function NewsGesture() {
 
     
     const newsCheck = () => {
-        Alert.alert( 
-            '뉴스 제스처 확인', '제스처 확인이 끝나면 확인 종료를 눌러주세요.', [ 
-                  {text: '확인 종료', onPress: () => navigation.navigate("NewsGesture")/*newsCheckExit()*/}, 
-            ]
-          );
-        /*axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=news-check")
+        console.log("뉴스 제스처 확인");
+       
+        axios.get(`${deviceAddress}/api/gesture?message=news-check`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -62,11 +57,11 @@ export default function NewsGesture() {
                       .catch((error) => {
                         console.error("네트워크 오류 발생:", error);
                         navigation.navigate('NewsGesture');
-                      });*/
+                      });
     }
 
     const newsCheckExit = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=news-check-exit")
+        axios.get(`${deviceAddress}/api/gesture?message=news-check-exit`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -84,7 +79,7 @@ export default function NewsGesture() {
     }
 
     const quitGesture = () => {
-        axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=config-exit")
+        axios.get(`${deviceAddress}/api/gesture?message=config-exit`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -126,7 +121,8 @@ export default function NewsGesture() {
                   marginBottom={20}
                 />
                 <View style={styles.top}>
-                  <TouchableOpacity onPress={()=> navigation.navigate("NewsGestureCapture")// newsCapture()
+                  <TouchableOpacity onPress={()=> navigation.navigate("NewsGestureCapture")
+                  // newsCapture()
                   }>
                     <Text style={styles.text}>뉴스 제스처 촬영</Text>      
                   </TouchableOpacity>
@@ -149,11 +145,11 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: '#fff3bd',
+      backgroundColor: '#f6ac4b',
     },
     header: {
       flex: 0.2,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       // color: "#A3C1C6",
       color: "white",
       width: SCREEN_WIDTH,
@@ -164,7 +160,7 @@ const styles = StyleSheet.create({
     },
     body: {
       flex: 2.0,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       width: SCREEN_WIDTH,
       justifyContent: "center",
       alignItems: "center",
@@ -172,7 +168,7 @@ const styles = StyleSheet.create({
     },
     footer: {
       flex: 0.3,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       width: SCREEN_WIDTH,
     },
     title: {
@@ -190,7 +186,7 @@ const styles = StyleSheet.create({
       color: "black",
     },
     flexbox: {
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       borderRadius: 20,
       height: 60,
       paddingHorizontal: 20,

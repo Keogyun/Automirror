@@ -1,8 +1,8 @@
 import React from "react";
 import { Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
-import { Ionicons, Feather } from "@expo/vector-icons";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import BottomBar from "./components/BottomBar.js";
 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 0.2,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     color: "black",
     width: SCREEN_WIDTH,
     paddingHorizontal: 10,
@@ -56,11 +56,11 @@ const styles = StyleSheet.create({
     flex: 2.0,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
   },
   footer: {
     flex: 0.3,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
   },
   home: {
     marginTop: 10,

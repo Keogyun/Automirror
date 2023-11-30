@@ -8,7 +8,6 @@ import {
     TextInput, 
     Text, 
     TouchableOpacity,    
-    Button,
     Alert
 } from "react-native";
 
@@ -16,6 +15,7 @@ export var userId = "";
 export var userPassword = "";
 export var userName = "";
 export var userEmail = "";
+export var deviceAddress = "";
 
 export default function Login() {
     const navigation = useNavigation();
@@ -30,7 +30,7 @@ export default function Login() {
             Alert.alert("비밀번호", "비밀번호를 입력해주세요.");
         }
         else{
-            axios.post("http://ceprj.gachon.ac.kr:60004/member/login", 
+            axios.post("http://ceprj.gachon.ac.kr:60004/member/login",
                 {
                         "userId": id,
                         "userPassword": password
@@ -39,13 +39,17 @@ export default function Login() {
                     if(resp.data.status === 200) {
                         console.log("로그인 되었습니다");
                         console.log(resp.data);
-                        AsyncStorage.setItem('login',JSON.stringify(resp.data)); 
+                    
                         userId = resp.data.userId;
                         userPassword = resp.data.userPassword;
                         userName = resp.data.name;
                         userEmail = resp.data.email;
+                       
+                        if (resp.data.deviceAddress != null) {
+                            deviceAddress = resp.data.deviceAddress;
+                            console.log(deviceAddress);
+                        }
                         console.log(userId);
-                        // loginData();
                         navigation.navigate('Home');
                         
                     }
@@ -99,7 +103,7 @@ export default function Login() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff3bd",
+        backgroundColor: "#f6ac4b",
         alignItems: "center",
         justifyContent: "center"
     },

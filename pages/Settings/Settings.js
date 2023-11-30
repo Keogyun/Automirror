@@ -3,31 +3,24 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Dimensions,
-  Modal,
 } from "react-native";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
-import { SelectList } from "react-native-dropdown-select-list";
 
 import BottomBar from "../Home/components/BottomBar.js";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import Unregister from "./Unregister.js";
+import { deviceAddress } from "../Splash/Login.js";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export default function Settings() {
   const navigation = useNavigation();
-  const [showModalKeyword, setShowModalKeyword] = useState(false);
-  const [showModalTime, setShowModalTime] = useState(false);
-  const [activeTab, setActiveTab] = useState("C");
-  const [selected, setSelected] = useState("");
+
 
   const gesturePage = () => {
-    axios.get("http://automirror00001.duckdns.org:8080/api/gesture?message=config-start")
+    axios.get(`${deviceAddress}/api/gesture?message=config-start`)
                       .then((response) => {
                         console.log(response.status);
                         if (response.status === 200) {
@@ -44,44 +37,6 @@ export default function Settings() {
                         navigation.navigate('Settings');
                       });
   }
- /* const Logout = async () => {
-    var accessToken = getData();
-    axios ({
-      method: 'post',
-      url: 'https://kapi.kakao.com/v1/user/logout',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }).then(() => {
-      console.log('logout success');
-      setLoggedIn(false);
-      setResult(null);
-      removeData();
-    }).catch(function (error) {
-      console.log('logout error', error);
-    })
-    navigation.navigate("Splash", { screen: "Splash" } );
-  }; */
-
-  /*const getData = async() => {
-    try {
-      const value = await AsyncStorage.getItem('userAccessToken');
-      if (value !== null) {
-        console.log(value);
-        return value;
-      }
-    } catch (error) {
-      console.log('getData error', error);
-    }
-  };*/
-
-  /*const removeData = async() => {
-    try {
-      await AsyncStorage.removeItem('userAccessToken');
-    } catch (error) {
-      console.log('removeData error', error);
-    }
-  };*/
 
   return (
     <View style={styles.container}>
@@ -113,8 +68,8 @@ export default function Settings() {
             size={24}
             color="black"
             onPress={() => {
-              // navigation.navigate("Gesture");
-              gesturePage();
+              navigation.navigate("Gesture");
+              // gesturePage();
             }}
           />
         </View>
@@ -151,96 +106,6 @@ export default function Settings() {
             }}
           />
         </View>
-        {/*
-        <View>
-          <Modal
-            animationType={"fade"}
-            transparent={true}
-            visible={showModalKeyword}
-            onRequestClose={() => {
-              console.log("Modal has been closed.");
-            }}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.keyword}>
-                <View style={styles.keywordContainer}>
-                  <View style={styles.category}>
-                    <Tab activeTab={activeTab} setActiveTab={setActiveTab} />
-                  </View>
-                  <View style={styles.contents}>
-                    <ScrollView style={{ marginTop: 20 }}>
-                      {activeTab == "C" ? <CalendarTab /> : null}
-                      {activeTab == "W" ? <WeatherTab /> : null}
-                      {activeTab == "B" ? <BusTab /> : null}
-                      {activeTab == "N" ? <NewsTab /> : null}
-                    </ScrollView>
-                  </View>
-                  <AntDesign
-                    style={{
-                      ...styles.keywordContainer,
-                      marginTop: -46,
-                      marginRight: 4,
-                      height: 40,
-                    }}
-                    name="closecircle"
-                    size={26}
-                    color="#666666"
-                    onPress={() => {
-                      setShowModalKeyword(!showModalKeyword);
-                    }}
-                  />
-                </View>
-              </View>
-            </View>
-          </Modal>
-        </View>
-        <View>
-         
-          <Modal
-            animationType={"fade"}
-            transparent={true}
-            visible={showModalTime}
-            onRequestClose={() => {
-              console.log("Modal has been closed.");
-            }}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.keyword}>
-                <View style={styles.keywordContainer}>
-                  <View
-                    style={{
-                      ...styles.category,
-                      width: "10%",
-                      borderRightWidth: 0,
-                    }}
-                  ></View>
-                  <View style={{ ...styles.contents, width: "66%" }}>
-                    <SelectList
-                      setSelected={(val) => setSelected(val)}
-                      data={timeline}
-                      save="value"
-                      placeholder="센서 작동 시간을 선택하세요."
-                    />
-                  </View>
-                  <AntDesign
-                    style={{
-                      ...styles.keywordContainer,
-                      marginTop: -46,
-                      marginRight: 4,
-                      height: 40,
-                    }}
-                    name="closecircle"
-                    size={26}
-                    color="#666666"
-                    onPress={() => {
-                      setShowModalTime(!showModalTime);
-                    }}
-                  />
-                </View>
-              </View>
-            </View>
-          </Modal>
-        </View> */}
       </View>
       <View style={styles.footer}>
         <BottomBar />
@@ -257,7 +122,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 0.2,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     // color: "#A3C1C6",
     color: "white",
     width: SCREEN_WIDTH,
@@ -268,12 +133,12 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 2.0,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     width: SCREEN_WIDTH,
   },
   footer: {
     flex: 0.3,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     width: SCREEN_WIDTH,
   },
   title: {
@@ -291,7 +156,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   flexbox: {
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     borderRadius: 20,
     height: 60,
     paddingHorizontal: 20,

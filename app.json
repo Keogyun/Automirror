@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/images/mirror.png",
       "resizeMode": "contain",
-      "backgroundColor": "#fff3bd"
+      "backgroundColor": "#f6ac4b"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,12 +19,27 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#fff3bd"
-      }
+        "foregroundImage": "./assets/images/mirror.png",
+        "backgroundColor": "#f6ac4b"
+      },
+      "package": "com.pjg9905.automirror"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c64cd527-c13e-40f0-9de0-6e6d645e5621"
+      }
+    },
+    "plugins": [
+      [
+        "expo-build-properties", {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]  
+    ]
   }
 }
