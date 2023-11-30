@@ -1,0 +1,109 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <div class="my-3 border-bottom">
+        <div>
+            <h1 class="h3 mb-2 text-gray-800" th:text="|${appUser.userId} 통계|"></h1>
+        </div>
+    </div>
+
+        <div class="mb-3" hidden="hidden">
+            <div class="mb-3">
+                <label class="form-label">버스 카운트</label>
+                <input id="busCount" type="text" class="form-control" th:value="${requestStat.busCount}" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label">뉴스 카운트</label>
+                <input id="newsCount" type="text" class="form-control" th:value="${requestStat.newsCount}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">투두 카운트</label>
+                <input id="todoCount" type="text" class="form-control" th:value="${requestStat.todoCount}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">날씨 카운트</label>
+                <input id="weatherCount" type="text" class="form-control" th:value="${requestStat.weatherCount}">
+            </div>
+        </div>
+    <div class="mb-3" hidden="hidden">
+        <div class="mb-3">
+            <label class="form-label">버스 오류 카운트</label>
+            <input id="busErrorCount" type="text" class="form-control" th:value="${errorStat.busCount}" >
+        </div>
+        <div class="mb-3">
+            <label class="form-label">뉴스 오류 카운트</label>
+            <input id="newsErrorCount" type="text" class="form-control" th:value="${errorStat.newsCount}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">투두 오류 카운트</label>
+            <input id="todoErrorCount" type="text" class="form-control" th:value="${errorStat.todoCount}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">날씨 오류 카운트</label>
+            <input id="weatherErrorCount" type="text" class="form-control" th:value="${errorStat.weatherCount}">
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="myChart1"></canvas>
+                </div>
+                <div class="card-footer text-center text-dark">
+                    <h3>요청 통계</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="myChart2"></canvas>
+                </div>
+                <div class="card-footer text-center text-dark">
+                    <h3>요청 오류 통계</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script layout:fragment="script" type='text/javascript'>
+    const busCount =$("#busCount").val();
+    const newsCount =$("#newsCount").val();
+    const todoCount =$("#todoCount").val();
+    const weatherCount =$("#weatherCount").val();
+    data = {
+        datasets: [{
+            backgroundColor: ['red', 'yellow', 'blue', 'green'],
+            data: [busCount, newsCount, todoCount, weatherCount]
+        }],
+
+        labels: ['버스요청', '뉴스요청', '할일요청', '날씨요청']
+    };
+
+    var ctx1 = document.getElementById("myChart1");
+    var myDoughnutChart = new Chart(ctx1, {
+        type: 'doughnut',
+        data: data,
+        options: {}
+    });
+
+    const busErrorCount = $("#busErrorCount").val();
+    const newsErrorCount = $("#newsErrorCount").val();
+    const todoErrorCount = $("#todoErrorCount").val();
+    const weatherErrorCount = $("#weatherErrorCount").val();
+
+    data2 = {
+        datasets: [{
+            backgroundColor: ['red', 'yellow', 'blue', 'green'],
+            data: [busErrorCount, newsErrorCount, todoErrorCount, weatherErrorCount]
+        }],
+
+        labels: ['버스요청오류', '뉴스요청오류', '할일요청오류', '날씨요청오류']
+    };
+    var ctx2 = document.getElementById("myChart2");
+    var myDoughnutChart2 = new Chart(ctx2, {
+        type: 'doughnut',
+        data: data2,
+        options: {}
+    });
+</script>
+</html>

@@ -1,0 +1,20 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container">
+  <h1 class="my-3 border-bottom pb-2" th:text="${device.deviceId}"></h1>
+  <div class="mb-3" th:text="${device.deviceAddress}"></div>
+  <div class="my-3">
+    <a href="javascript:void(0);" th:data-uri="@{|/device/delete/${deviceIndex}|}"
+       class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a>
+  </div>
+</div>
+<script layout:fragment="script" type="text/javascript">
+  const delete_elements = document.getElementsByClassName("delete");
+  Array.from(delete_elements).forEach(function(element){
+    element.addEventListener('click', function(){
+      if(confirm("정말로 삭제하시겠습니까?")){
+        location.href = this.dataset.uri;
+      };
+    });
+  });
+</script>
+</html>

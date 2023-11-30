@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/magnific-popup.css}">
+    <!-- sbb CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sb-admin-2.min.css}">
+    <title>오토미러 관리자 웹</title>
+</head>
+<body>
+
+
+<!-- 네비게이션바 -->
+<!--<nav th:replace="~{navbar :: navbarFragment}"></nav>-->
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+<!--<div layout:fragment="content" class="container my-3"></div>-->
+
+
+<!-- 새로운 Layout 추가부분 -->
+<div id="wrapper">
+    <th:block th:replace="~{sidebar :: sidebarFragment}"></th:block>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <div id="content">
+<!--            <div class="banner_content">-->
+<!--            </div>-->
+            <th:block th:replace="~{topbar :: topbarFragment}"></th:block>
+            <div layout:fragment="content" class="container my-3"></div>
+        </div>
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; 가천대학교 컴퓨터공학과</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+
+
+
+
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+<!-- Bootstrap JS -->
+        <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+        <script th:src="@{/js/popper.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+        <script th:src="@{/js/sb-admin-2.min.js}"></script>
+        <script th:src="@{https://cdn.jsdelivr.net/npm/chart.js@2.8.0}"></script>
+<!-- 자바스크립트 Start -->
+<th:block layout:fragment="script"></th:block>
+<!-- 자바스크립트 End -->
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <div class="my-3 border-bottom">
+        <div>
+            <h4>관리자 정보 수정</h4>
+        </div>
+    </div>
+    <form>
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div class="mb-3">
+<!--            <label class="form-label">사용자ID</label>-->
+<!--            <input type="text" th:field="*{username}" class="form-control" th:text="${siteUser.username}">-->
+        </div>
+        <div class="mb-3">
+            <label class="form-label">비밀번호</label>
+            <input type="password" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">비밀번호 확인</label>
+            <input type="password" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">이메일</label>
+            <input type="email" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+</div>
+</html>

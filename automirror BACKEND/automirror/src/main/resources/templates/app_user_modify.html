@@ -1,0 +1,54 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <div class="my-3 border-bottom">
+        <div>
+            <h1 class="h3 mb-2 text-gray-800">사용자 정보 수정</h1>
+        </div>
+    </div>
+    <form>
+        <div class="mb-3">
+            <div class="mb-3" hidden="hidden">
+                <label class="form-label">사용자 인덱스</label>
+                <input id="userIndex" type="text" class="form-control" th:value="${appUser.userIndex}" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label">사용자 아이디</label>
+                <input id="userId" type="text" class="form-control" th:value="${appUser.userId}" readonly>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">사용자 이름</label>
+                <input id="name" type="text" class="form-control" th:value="${appUser.name}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">사용자 이메일</label>
+                <input id="email" type="text" class="form-control" th:value="${appUser.email}">
+            </div>
+            <button class="btn btn-primary btn-user btn-lg" type="button" onclick="dataSend()" >사용자 정보 수정</button>
+        </div>
+        <div id="resultDiv">
+            <p class="alert alert-primary" th:if="${msg}!=null" th:text="${msg}"></p>
+        </div>
+    </form>
+</div>
+<script layout:fragment="script" type='text/javascript'>
+    function dataSend(){
+        const userIndex =$("#userIndex").val();
+        const userId =$("#userId").val();
+        const name =$("#name").val();
+        const email =$("#email").val();
+        const sendDTO = {
+            userIndex:userIndex,
+            userId:userId,
+            name:name,
+            email:email,
+        };
+        $.ajax({
+            url: "/member/modify",
+            data: sendDTO,
+            type: 'POST',
+        }).done(function (data){
+            $("#resultDiv").replaceWith(data);
+        });
+    }
+</script>
+</html>
