@@ -1,0 +1,48 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <div class="my-3 border-bottom">
+        <div>
+            <h1 class="h3 mb-2 text-gray-800">디바이스 정보 수정</h1>
+        </div>
+    </div>
+    <form>
+        <div class="mb-3">
+            <div class="mb-3">
+                <label class="form-label">디바이스 인덱스</label>
+                <input id="deviceIndex" type="text" class="form-control" th:value="${device.deviceIndex}" readonly>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">디바이스 아이디</label>
+                <input id="deviceId" type="text" class="form-control" th:value="${device.deviceId}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">디바이스 주소</label>
+                <input id="deviceAddress" type="text" class="form-control" th:value="${device.deviceAddress}">
+            </div>
+                <button class="btn btn-primary btn-user btn-lg" type="button" onclick="dataSend()" >디바이스 정보 수정</button>
+        </div>
+        <div id="resultDiv">
+            <p class="alert alert-primary" th:if="${msg}!=null" th:text="${msg}"></p>
+        </div>
+    </form>
+</div>
+<script layout:fragment="script" type='text/javascript'>
+    function dataSend(){
+        const deviceIndex =$("#deviceIndex").val();
+        const deviceId =$("#deviceId").val();
+        const deviceAddress =$("#deviceAddress").val();
+        const sendDTO = {
+            deviceIndex:deviceIndex,
+            deviceId:deviceId,
+            deviceAddress:deviceAddress,
+        };
+        $.ajax({
+            url: "/device/modify",
+            data: sendDTO,
+            type: 'POST',
+        }).done(function (data){
+            $("#resultDiv").replaceWith(data);
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,20 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container">
+  <div class="my-3 border-bottom">
+    <div>
+      <h1 class="h3 mb-2 text-gray-800">디바이스 추가</h1>
+    </div>
+  </div>
+  <form th:action="@{/device/create}" method="post">
+    <div class="mb-3">
+      <label class="form-label">디바이스 아이디</label>
+      <input type="text" name="deviceId" id="deviceId" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">디바이스 주소</label>
+      <input type="text" name="deviceAddress" id="deviceAddress" class="form-control">
+    </div>
+      <input type="submit" value="디바이스 추가" class="btn btn-primary btn-user btn-lg">
+  </form>
+</div>
+</html>
