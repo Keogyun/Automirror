@@ -182,11 +182,11 @@ export default function WeatherInfo() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff3bd',
+    backgroundColor: '#f6ac4b',
   },
   header: {
     flex: 0.2,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     color: "black",
     flexDirection: "row",
     alignItems: "center",
@@ -195,13 +195,13 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 2.0,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     width: SCREEN_WIDTH,
     marginTop: 60,
   },
   footer: {
     flex: 0.3,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     width: SCREEN_WIDTH,
   },
   title: {

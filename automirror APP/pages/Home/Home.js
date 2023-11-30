@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 0.2,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     color: "black",
     width: SCREEN_WIDTH,
     paddingHorizontal: 10,
@@ -56,11 +56,11 @@ const styles = StyleSheet.create({
     flex: 2.0,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
   },
   footer: {
     flex: 0.3,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
   },
   home: {
     marginTop: 10,

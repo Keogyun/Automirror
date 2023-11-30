@@ -236,8 +236,8 @@ export default function Todo() {
 
             <ScrollView>
                 {
-                Object.keys(toDos).map((key) => (
-                    toDos[key].working === working ?
+                Object.keys(toDos || {}).map((key) => (
+                    toDos[key].working === working ?  
                     <View style={styles.toDo} key={key}>
                         <Text style={{...styles.toDoText, 
                         textDecorationLine: toDos[key].checked? 'line-through' : null,
@@ -275,12 +275,12 @@ export default function Todo() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     paddingHorizontal: 20,
   },
   header: {
     flex: 0.2,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     color: "black",
     flexDirection: "row",
     alignItems: "center",
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 2.0,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT - 35,
     marginTop: 30,
@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: 0.3,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     width: SCREEN_WIDTH,
     marginLeft: -18
   },

@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
       },
       header: {
         flex: 0.2,
-        backgroundColor: "#fff3bd",
+        backgroundColor: "#f6ac4b",
         color: "black",
         width: SCREEN_WIDTH,
         flexDirection: "row",
@@ -91,12 +91,12 @@ const styles = StyleSheet.create({
       },
       body: {
         flex: 2.0,
-        backgroundColor: "#fff3bd",
+        backgroundColor: "#f6ac4b",
         width: SCREEN_WIDTH,
       },
       footer: {
         flex: 0.3,
-        backgroundColor: "#fff3bd",
+        backgroundColor: "#f6ac4b",
         width: SCREEN_WIDTH,
       },
       title: {

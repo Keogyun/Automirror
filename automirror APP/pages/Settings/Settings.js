@@ -68,8 +68,8 @@ export default function Settings() {
             size={24}
             color="black"
             onPress={() => {
-              // navigation.navigate("Gesture");
-              gesturePage();
+              navigation.navigate("Gesture");
+              // gesturePage();
             }}
           />
         </View>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 0.2,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     // color: "#A3C1C6",
     color: "white",
     width: SCREEN_WIDTH,
@@ -133,12 +133,12 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 2.0,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     width: SCREEN_WIDTH,
   },
   footer: {
     flex: 0.3,
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     width: SCREEN_WIDTH,
   },
   title: {
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   flexbox: {
-    backgroundColor: "#fff3bd",
+    backgroundColor: "#f6ac4b",
     borderRadius: 20,
     height: 60,
     paddingHorizontal: 20,

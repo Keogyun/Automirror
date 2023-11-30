@@ -80,7 +80,7 @@ export default function Device() {
 const styles = StyleSheet.create({
   container: {
       flex: 1,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       alignItems: "center",
       justifyContent: "center"
   },

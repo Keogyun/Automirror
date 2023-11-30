@@ -30,7 +30,7 @@ export default function Login() {
             Alert.alert("비밀번호", "비밀번호를 입력해주세요.");
         }
         else{
-            axios.post("http://ceprj.gachon.ac.kr:60004/member/login", 
+            axios.post("http://ceprj.gachon.ac.kr:60004/member/login",
                 {
                         "userId": id,
                         "userPassword": password
@@ -103,7 +103,7 @@ export default function Login() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff3bd",
+        backgroundColor: "#f6ac4b",
         alignItems: "center",
         justifyContent: "center"
     },

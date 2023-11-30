@@ -3,9 +3,9 @@ import React from "react";
 import "react-native-gesture-handler";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Splash from "../automirror APP/pages/Splash/Splash.js";
-import Home from "../automirror APP/pages/Home/Home.js";
-import Settings from "../automirror APP/pages/Settings/Settings.js";
+import Splash from "./pages/Splash/Splash.js";
+import Home from "./pages/Home/Home.js";
+import Settings from "./pages/Settings/Settings.js";
 import WeatherInfo from "./pages/Info/WeatherInfo.js";
 import Device from "./pages/Settings/Device.js";
 import Register from "./pages/Splash/Register.js";
@@ -16,7 +16,6 @@ import FindPw from "./pages/Splash/FindPw.js";
 import CheckInfo from "./pages/Settings/CheckInfo.js";
 import ChangePw from "./pages/Splash/ChangePw.js";
 import Unregister from "./pages/Settings/Unregister.js";
-import TodoInfo from "./pages/Info/TodoInfo.js";
 import BusInfo from "./pages/Info/BusInfo.js";
 import Gesture from "./pages/Gesture/Gesture.js";
 import WeatherGesture from "./pages/Gesture/WeatherGesture.js";
@@ -51,7 +50,6 @@ export default function App() {
         <Stack.Screen name="CheckInfo" component={CheckInfo} />
         <Stack.Screen name="Unregister" component={Unregister} />
         <Stack.Screen name="Device" component={Device} />
-        <Stack.Screen name="TodoInfo" component={TodoInfo} />
         <Stack.Screen name="Todo" component={Todo} />
         <Stack.Screen name="WeatherInfo" component={WeatherInfo} />
         <Stack.Screen name="BusInfo" component={BusInfo} />

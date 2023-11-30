@@ -126,11 +126,11 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: '#fff3bd',
+      backgroundColor: '#f6ac4b',
     },
     header: {
       flex: 0.2,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       // color: "#A3C1C6",
       color: "white",
       width: SCREEN_WIDTH,
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     },
     body: {
       flex: 2.0,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       width: SCREEN_WIDTH,
       justifyContent: "center",
       alignItems: "center",
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     },
     footer: {
       flex: 0.3,
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       width: SCREEN_WIDTH,
     },
     title: {
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
       color: "black",
     },
     flexbox: {
-      backgroundColor: "#fff3bd",
+      backgroundColor: "#f6ac4b",
       borderRadius: 20,
       height: 60,
       paddingHorizontal: 20,
